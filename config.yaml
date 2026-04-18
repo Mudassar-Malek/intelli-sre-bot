@@ -1,0 +1,34 @@
+# ============================================================
+# IntelliSREBot Configuration
+# Copy .env.example to .env and fill in secrets.
+# Non-secret settings can be changed here.
+# ============================================================
+
+# Claude model to use
+claude_model: "claude-sonnet-4-6"
+
+# Max tokens for Claude responses
+max_tokens: 4096
+
+# Services considered payment-critical — always treated as CRITICAL in prod
+# regardless of the alert's original severity label.
+# Add your own business-critical service names here.
+critical_services:
+  - "payments"
+  - "auth"
+  - "checkout"
+  - "settlement"
+  - "ledger"
+  - "fraud-detection"
+  # Add your own: - "your-critical-service"
+
+# Production environment names — alerts in these envs get higher effective severity
+production_environments:
+  - "production"
+  - "prod"
+
+# Webhook server port
+webhook_port: 8080
+
+# Triage result TTL in seconds (in-memory store only — for persistent storage use Redis)
+triage_result_ttl: 3600
