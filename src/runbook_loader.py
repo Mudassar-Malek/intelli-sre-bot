@@ -29,8 +29,12 @@ class RunbookLoader:
         if normalized in self._cache:
             return normalized, self._cache[normalized]
 
-        # Partial match — find longest key that is a substring of the alert title
-        candidates = [(k, v) for k, v in self._cache.items() if k in normalized or normalized in k]
+        # Partial match — compare with underscores stripped so "higherrorrate" matches "high_error_rate"
+        normalized_flat = normalized.replace("_", "")
+        candidates = [
+            (k, v) for k, v in self._cache.items()
+            if k.replace("_", "") in normalized_flat or normalized_flat in k.replace("_", "")
+        ]
         if candidates:
             best = max(candidates, key=lambda x: len(x[0]))
             return best

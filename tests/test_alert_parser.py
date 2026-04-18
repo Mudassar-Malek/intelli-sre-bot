@@ -49,7 +49,14 @@ def test_generic_parse_unknown_severity():
 
 
 def test_severity_mapping():
-    for raw, expected in [("P1", Severity.CRITICAL), ("p2", Severity.HIGH), ("warning", Severity.MEDIUM)]:
+    # Datadog priority labels P1-P4
+    for raw, expected in [("P1", Severity.CRITICAL), ("p2", Severity.HIGH), ("P3", Severity.MEDIUM), ("P4", Severity.LOW)]:
         payload = {"id": "x", "title": "test", "priority": raw, "tags": {}}
         alert = from_datadog(payload)
+        assert alert.severity == expected, f"Failed for {raw}"
+
+    # Generic severity labels (warning, critical, etc.) go through from_generic
+    for raw, expected in [("warning", Severity.MEDIUM), ("critical", Severity.CRITICAL), ("info", Severity.LOW)]:
+        payload = {"title": "test", "severity": raw}
+        alert = from_generic(payload)
         assert alert.severity == expected, f"Failed for {raw}"
