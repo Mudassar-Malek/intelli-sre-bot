@@ -3,7 +3,6 @@ Normalize alerts from different sources into a common Alert model.
 Supports Alertmanager (Prometheus), Datadog, and generic webhook payloads.
 """
 
-import re
 from .models import Alert, Severity
 
 

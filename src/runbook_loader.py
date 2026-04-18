@@ -3,7 +3,6 @@ Loads runbooks from the /runbooks directory and matches them to alerts
 using alert title and label heuristics.
 """
 
-import os
 import re
 from pathlib import Path
 

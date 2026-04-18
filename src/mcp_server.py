@@ -7,13 +7,11 @@ Start: python -m src.mcp_server
 
 import asyncio
 import json
-import os
 
 from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp.types import TextContent, Tool
 
-from .alert_parser import from_generic
 from .models import Alert, Severity
 from .runbook_loader import RunbookLoader
 from .sre_agent import IntelliSREAgent

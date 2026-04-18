@@ -220,7 +220,7 @@ class IntelliSREAgent:
 
     def _parse_result(self, alert: Alert, raw_analysis: str) -> TriageResult:
         lines = raw_analysis.strip().split("\n")
-        summary = next((l.lstrip("# ").strip() for l in lines if l.strip()), raw_analysis[:120])
+        summary = next((line.lstrip("# ").strip() for line in lines if line.strip()), raw_analysis[:120])
         _, runbook_content = self.runbook_loader.find(alert.title, alert.labels)
         runbook_url = None
         if runbook_content:

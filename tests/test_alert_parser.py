@@ -1,6 +1,5 @@
 """Tests for alert parsers."""
 
-import pytest
 from src.alert_parser import from_alertmanager, from_datadog, from_generic
 from src.models import Severity
 
